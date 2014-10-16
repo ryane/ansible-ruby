@@ -48,7 +48,7 @@ None
 Example Playbook
 ----------------
 
-Install the specified Ruby version:
+Install Ruby 2.1.3 (please verify the checksum before using as-is):
 
     - hosts: appservers
       roles:
