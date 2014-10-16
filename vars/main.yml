@@ -1,0 +1,14 @@
+---
+ruby_apt_dependencies:
+  - autoconf
+  - build-essential
+  - libreadline-dev
+  - libssl-dev
+  - libyaml-dev
+  - zlib1g-dev
+  - libsqlite3-dev
+  - libxml2-dev
+  - libxslt1-dev
+  - curl
+ruby_name: ruby-{{ ruby_version }}
+ruby_source_directory: "{{ ruby_temp_directory }}/{{ ruby_name }}"

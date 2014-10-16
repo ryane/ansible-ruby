@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Ryan Eschinger
+  description: Installs specified Ruby version from source.
+  company: Jossware
+  license: MIT
+  min_ansible_version: 1.7
+  # this probably works on other (debian) platforms and versions but I haven't tested them
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - trusty
+  categories:
+  - development
+dependencies: []
+  # List your role dependencies here, one per line. Only
+  # dependencies available via galaxy should be listed here.
+  # Be sure to remove the '[]' above if you add dependencies
+  # to this list.
+  

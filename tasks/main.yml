@@ -1,0 +1,45 @@
+---
+
+- name: Update APT package cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install Ruby development dependencies
+  apt: pkg={{ item }}
+  with_items: ruby_apt_dependencies
+
+- name: Ensure Ruby build directory is present
+  file: state=directory path={{ ruby_temp_directory }}
+
+- name: Check if the Ruby source has been downloaded
+  stat: path="{{ ruby_temp_directory }}/{{ ruby_name }}.tar.gz"
+  register: ruby_source_download
+
+- name: Download Ruby source package
+  get_url: url={{ ruby_source_url }}
+           dest={{ ruby_temp_directory }}/{{ ruby_name }}.tar.gz
+           sha256sum={{ ruby_source_checksum }}
+  when: not ruby_source_download.stat.exists
+
+- name: Extract Ruby source code
+  command: tar -xf ruby-{{ ruby_version }}.tar.gz
+           chdir={{ ruby_temp_directory }}
+           creates={{ ruby_source_directory }}
+
+- name: Configure Ruby compilation
+  command: ./configure
+           chdir={{ ruby_source_directory }}
+           creates={{ ruby_source_directory }}/Makefile
+
+- name: Compile Ruby
+  command: make
+           chdir={{ ruby_source_directory }}
+           creates={{ ruby_source_directory }}/ruby
+
+- name: Install Ruby
+  command: make install
+           chdir={{ ruby_source_directory }}
+           creates=/usr/local/bin/ruby
+
+- name: Install Bundler
+  command: /usr/local/bin/gem install bundler --no-ri --no-rdoc
+
