@@ -1,2 +1,3 @@
 ---
+ruby_install_directory: /opt
 ruby_temp_directory: /usr/local/src

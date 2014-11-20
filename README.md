@@ -27,6 +27,9 @@ The list of variables that can be set (but you shouldn't have to):
     # The location on the server where the Ruby source will be downloaded and compiled
     ruby_temp_directory: /usr/local/src
 
+    # The location on the server where the Ruby version will be installed. Ruby binaries will be symlinked into /usr/local/bin
+    ruby_install_directory: /opt
+
     # The list of apt packages that need to be installed to build ruby:
     ruby_apt_dependencies:
       - autoconf
